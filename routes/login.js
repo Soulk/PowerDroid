@@ -18,6 +18,8 @@ router.get('/login', function(req, res, next) {
     query.on("end", function (result) {
         console.log(JSON.stringify(result.rows, null, "    "));
         if(result.rows.length>0) {
+            global.id = result.rows[0].id;
+            global.username = req.query.username;
             client.end();
             res.redirect("/index");
         } else {
@@ -28,5 +30,4 @@ router.get('/login', function(req, res, next) {
 
     });
 });
-
 module.exports = router;
