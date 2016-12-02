@@ -17,7 +17,6 @@ router.get('/', function(req, res, next) {
         result.addRow(row);
     });
     query.on("end", function (result) {
-        console.log(JSON.stringify(result.rows, null, "    "));
         client.end();
         res.render('filemanaging-view', { rows: result.rows});
     });
@@ -59,8 +58,28 @@ router.get('/del',function(req,res,next) {
 });
 
 router.get('/script',function(req,res,next) {
+    console.log(req);
+    var path = "./script/platform-tools/script.bat";
+    var data = "adb shell input keyevent 26\nadb install -r "+"app-debug.apk\nadb install -r app-debug-androidTest-unaligned.apk\nadb shell am instrument -w com.pje.def.wikibook.test/android.test.InstrumentationTestRunner\nexit";
+
+    fs.writeFile(path, data, function(error) {
+        if (error) {
+            console.error("write error:  " + error.message);
+        } else {
+            console.log("Successful Write to " + path);
+            child = exec('start script.bat',{cwd: 'script\\platform-tools'},
+                function (error, stdout, stderr) {
+                    console.log('stdout: ' + stdout);
+                    console.log('stderr: ' + stderr);
+                    if (error !== null) {
+                        console.log('exec error: ' + error);
+                    }
+                });
+        }
+    });
     //TODO : Modifier l'adresse pour la release
-    child = exec('adb',{cwd: 'C:\\Users\\David\\AppData\\Local\\Android\\android-sdk\\platform-tools'},
+    /*
+    child = exec('',{cwd: 'C:\\Users\\David\\AppData\\Local\\Android\\android-sdk\\platform-tools'},
         function (error, stdout, stderr) {
             console.log('stdout: ' + stdout);
             console.log('stderr: ' + stderr);
@@ -68,6 +87,7 @@ router.get('/script',function(req,res,next) {
                 console.log('exec error: ' + error);
             }
         });
+    */
 });
 
 module.exports = router;
