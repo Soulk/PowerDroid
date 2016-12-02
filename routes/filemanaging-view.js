@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
     var client = new pg.Client(req.app.get('connexion'));
     client.connect();
 
-    var query = client.query("SELECT * FROM file_table WHERE idUser='"+global.id+"'");
+    var query = client.query("SELECT * FROM file_table WHERE idUser='"+req.session.idd+"'");
     query.on("row", function (row, result) {
         result.addRow(row);
     });

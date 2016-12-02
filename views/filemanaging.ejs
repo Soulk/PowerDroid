@@ -80,54 +80,129 @@
         </div>
       </div>
 
-
-
-
-
-      </div><!--/.row-->
-      <div class="row">
-      </div>
-      </br>
-
-      </div>
-
       <div class="row">
         <div class="col-lg-12">
           <section class="panel">
           <form id="form" action="filemanaging/add" method="post" class="navbar-form navbar-left" enctype="multipart/form-data">
             <div class="form-group">
-              <label for="test">Ajouter une nouvelle apk</label>
-              <INPUT id="test" TYPE="file"  NAME="test" SIZE=40>
+              <div id="apk">
+                <label for="test">Ajouter une nouvelle apk</label>
+                <INPUT id="test" TYPE="file"  NAME="test" SIZE=40>
+              </div>
+              <table>
+                <tr>
+                  <td>
+                    <div class="checkbox">
+                      <label>
+                        <input name="robotium" type="checkbox" id="robotium"> Robotium
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" id="monkey"> Android Monkey
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="sr-only" id="apktest">
+                      <label for="test1">Ajouter une nouvelle apk de test</label>
+                      <INPUT id="test1" TYPE="file"  NAME="test1" SIZE=40>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="sr-only" id="apkmanifestandroid">
+                      <label for="test3">Ajouter un nouveau manifest associé</label>
+                      <INPUT id="test3" TYPE="file"  NAME="test3" SIZE=40>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="sr-only" id="apktestmanifest">
+                      <label for="test2">Ajouter un nouveau manifest de test associé</label>
+                      <INPUT id="test2" TYPE="file"  NAME="test2" SIZE=40>
+                    </div>
+                  </td>
+                </tr>
 
-              <label for="test1">Ajouter une nouvelle apk de test</label>
-              <INPUT id="test1" TYPE="file"  NAME="test1" SIZE=40>
 
-              <label for="test2">Ajouter un nouveau manifest associé</label>
-              <INPUT id="test2" TYPE="file"  NAME="test2" SIZE=40>
+              </table>
             </div>
 
             <br>
-            <button type="submit" class="btn btn-default">Submit</button>
+            <button id="submit" type="submit" class="btn btn-default" disabled=true>Submit</button>
           </form>
           </section>
         </div>
       </div>
-
-
-      <!-- Today status end -->
-
-
-
-
-      <!-- statics end -->
-
-
-
-      <!-- project team & activity end -->
-
+      <div role="dialog" id="myModalCaution" class="modal fade">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" data-dismiss="modal" class="close">×</button>
+              <h4 class="modal-title">Attention</h4>
+            </div>
+            <div class="modal-body">
+              <p id="paraModal" class="alert alert-danger"><button type="button" data-dismiss="modal" class="btn btn-default">Close</button></p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   </section>
-  <!--main content end-->
 </section>
 </body>
+<script>
+  $(document).ready(function() {
+    document.getElementById("robotium").addEventListener("change", function (e) {
+      if (e.target.checked) {
+        document.getElementById("submit").disabled = false;
+        document.getElementById("apktest").className = "";
+        document.getElementById("apktestmanifest").className = "";
+      } else {
+        if (!document.getElementById("monkey").checked)document.getElementById("submit").disabled = true;
+        ;
+        document.getElementById("apktest").className = "sr-only";
+        document.getElementById("apktestmanifest").className = "sr-only";
+      }
+    });
+
+    document.getElementById("monkey").addEventListener("change", function (e) {
+      if (e.target.checked) {
+        document.getElementById("submit").disabled = false;
+        document.getElementById("apkmanifestandroid").className = "";
+      } else {
+        if (!document.getElementById("robotium").checked) document.getElementById("submit").disabled = true;
+        ;
+        document.getElementById("apkmanifestandroid").className = "sr-only";
+      }
+    });
+    function processForm(e) {
+      if (e.preventDefault) e.preventDefault();
+      if (document.getElementById("test").files.length == 0) {
+        $("#paraModal").text("Veuillez bien remplir tous les champs.");
+        $("#myModalCaution").modal('show');
+        return false;
+      }
+      /* do what you want with the form */
+
+      // You must return false to prevent the default form behavior
+      return false;
+    }
+
+    var form = document.getElementById('form');
+    if (form.attachEvent) {
+      form.attachEvent("submit", processForm);
+    } else {
+      form.addEventListener("submit", processForm);
+    }
+  });
+</script>
 </html>
