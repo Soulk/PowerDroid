@@ -2,7 +2,7 @@
  * Created by David on 07/10/2016.
  */
 const pg = require('pg');
-const connectionString = process.env.DATABASE_URL || 'postgres://postgres:lolilol97@localhost:5433/todo';
+const connectionString = process.env.DATABASE_URL || 'postgres://postgres:bas115190594@localhost:5432/postgres';
 
 const client = new pg.Client(connectionString);
 client.connect();

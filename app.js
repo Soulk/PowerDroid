@@ -71,6 +71,6 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-var conString = "postgres://postgres:lolilol97@localhost:5433/todo";
+var conString = "postgres://postgres:bas115190594@localhost:5432/postgres";
 app.set("connexion",conString);
 module.exports = app;
