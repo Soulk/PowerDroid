@@ -134,7 +134,7 @@
             </div>
 
             <br>
-            <button id="submit" type="submit" class="btn btn-default" disabled=true>Submit</button>
+            <button id="btnsubmit" type="submit" class="btn btn-default" disabled=true>Submit</button>
           </form>
           </section>
         </div>
@@ -163,11 +163,11 @@
   $(document).ready(function() {
     document.getElementById("robotium").addEventListener("change", function (e) {
       if (e.target.checked) {
-        document.getElementById("submit").disabled = false;
+        document.getElementById("btnsubmit").disabled = false;
         document.getElementById("apktest").className = "";
         document.getElementById("apktestmanifest").className = "";
       } else {
-        if (!document.getElementById("monkey").checked)document.getElementById("submit").disabled = true;
+        if (!document.getElementById("monkey").checked)document.getElementById("btnsubmit").disabled = true;
         ;
         document.getElementById("apktest").className = "sr-only";
         document.getElementById("apktestmanifest").className = "sr-only";
@@ -176,25 +176,31 @@
 
     document.getElementById("monkey").addEventListener("change", function (e) {
       if (e.target.checked) {
-        document.getElementById("submit").disabled = false;
+        document.getElementById("btnsubmit").disabled = false;
         document.getElementById("apkmanifestandroid").className = "";
       } else {
-        if (!document.getElementById("robotium").checked) document.getElementById("submit").disabled = true;
+        if (!document.getElementById("robotium").checked) document.getElementById("btnsubmit").disabled = true;
         ;
         document.getElementById("apkmanifestandroid").className = "sr-only";
       }
     });
     function processForm(e) {
       if (e.preventDefault) e.preventDefault();
-      if (document.getElementById("test").files.length == 0) {
-        $("#paraModal").text("Veuillez bien remplir tous les champs.");
-        $("#myModalCaution").modal('show');
-        return false;
+      if (document.getElementById("robotium").checked && (document.getElementById("test").files.length == 0 || document.getElementById("test1").files.length == 0 || document.getElementById("test2").files.length == 0)) {
+          $("#paraModal").text("Veuillez bien remplir tous les champs.");
+          $("#myModalCaution").modal('show');
+          return false;
+      }
+      if (document.getElementById("monkey").checked && (document.getElementById("test").files.length == 0 || document.getElementById("test3").files.length == 0)) {
+          $("#paraModal").text("Veuillez bien remplir tous les champs.");
+          $("#myModalCaution").modal('show');
+          return false;
       }
       /* do what you want with the form */
 
       // You must return false to prevent the default form behavior
-      return false;
+      document.getElementById('form').submit();
+      return true;
     }
 
     var form = document.getElementById('form');

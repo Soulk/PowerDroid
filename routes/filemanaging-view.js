@@ -5,7 +5,6 @@ var fs = require('file-system');
 var path = require('path');
 var mime = require('mime');
 var exec = require('child_process').exec, child;
-var xmldoc = require('xmldoc');
 
 /* GET filemanaging view page. */
 router.get('/', function(req, res, next) {
@@ -70,12 +69,12 @@ router.get('/script',function(req,res,next) {
 
             var dataFileApk = readResult.rows[0].dataapk;
             var dataFileApkTest = readResult.rows[0].dataapktest;
-            var dataFileApkTest = readResult.rows[0].datamanifest;
+            var dataFileManifest = readResult.rows[0].datamanifest;
 
 
             fs.writeFile('./uploads/'+fileNameApk, dataFileApk);
             fs.writeFile('./uploads/'+fileNameApkTest, dataFileApkTest);
-            fs.writeFile('./uploads/'+fileNameManifest, dataFileApkTest);
+            fs.writeFile('./uploads/'+fileNameManifest, dataFileManifest);
 
             console.log(req);
             var path = "./script/platform-tools/script.bat";
@@ -91,7 +90,7 @@ router.get('/script',function(req,res,next) {
                 var result1 = regex.exec(content)[1];
                 var result2 = regex1.exec(content)[1];
 
-                var data = "adb shell input keyevent 26\nadb install -r "+fileNameApk+"\nadb install -r "+fileNameApkTest+"\nadb shell am instrument -w "+result1+"/"+result2+"\n";
+                var data = "adb shell input keyevent 26\nadb install -r "+fileNameApk+"\nadb install -r "+fileNameApkTest+"\nadb shell am instrument -w "+result1+"/"+result2+"\nexit\n";
                 console.log(data);
                 fs.writeFile(path, data, function(error) {
                     if (error) {
