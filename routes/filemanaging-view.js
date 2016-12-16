@@ -5,7 +5,6 @@ var fs = require('file-system');
 var path = require('path');
 var mime = require('mime');
 var exec = require('child_process').exec, child;
-var xmldoc = require('xmldoc');
 
 /* GET filemanaging view page. */
 router.get('/', function(req, res, next) {
@@ -70,60 +69,49 @@ router.get('/script',function(req,res,next) {
 
             var dataFileApk = readResult.rows[0].dataapk;
             var dataFileApkTest = readResult.rows[0].dataapktest;
-            var dataFileApkTest = readResult.rows[0].datamanifest;
+            var dataFileManifest = readResult.rows[0].datamanifest;
 
 
             fs.writeFile('./uploads/'+fileNameApk, dataFileApk);
             fs.writeFile('./uploads/'+fileNameApkTest, dataFileApkTest);
-            fs.writeFile('./uploads/'+fileNameManifest, dataFileApkTest);
+            fs.writeFile('./uploads/'+fileNameManifest, dataFileManifest);
 
             console.log(req);
             var path = "./script/platform-tools/script.bat";
 
-            if(req.query.method == 'robotium'){
-                var fileNameManifest = readResult.rows[0].filenamemanifest;
-                var fileNameApkTest = readResult.rows[0].filenameapktest;
-                var dataFileApkTest = readResult.rows[0].dataapktest;
-                var dataManifest = readResult.rows[0].datamanifest;
-                fs.writeFile('./uploads/'+fileNameApkTest, dataFileApkTest);
-                fs.writeFile('./uploads/' + fileNameManifest, dataManifest);
+            fs.readFile('./uploads/'+fileNameManifest, function read(err, content) {
+                if (err) {
+                    throw err;
+                }
 
-                fs.readFile('./uploads/'+fileNameManifest, function read(err, content) {
-                    if (err) {
-                        throw err;
+                var regex = /package="(.*)"/g;
+                var regex1 =/<instrumentation android:name="(.*)"/g;
+
+                var result1 = regex.exec(content)[1];
+                var result2 = regex1.exec(content)[1];
+
+                var data = "adb shell input keyevent 26\nadb install -r "+fileNameApk+"\nadb install -r "+fileNameApkTest+"\nadb shell am instrument -w "+result1+"/"+result2+"\nexit\n";
+                console.log(data);
+                fs.writeFile(path, data, function(error) {
+                    if (error) {
+                        console.error("write error:  " + error.message);
+                    } else {
+                        console.log("Successful Write to " + path);
+                        child = exec('start script.bat',{cwd: 'script\\platform-tools'},
+                            function (error, stdout, stderr) {
+                                console.log('stdout: ' + stdout);
+                                console.log('stderr: ' + stderr);
+                                if (error !== null) {
+                                    console.log('exec error: ' + error);
+                                }
+                                fs.unlink("./uploads/"+fileNameApk);
+                                fs.unlink("./uploads/"+fileNameApkTest);
+                                fs.unlink("./uploads/"+fileNameManifest);
+                            });
                     }
-
-                    var regex = /package="(.*)"/g;
-                    var regex1 = /<instrumentation android:name="(.*)"/g;
-
-                    var result1 = regex.exec(content)[1];
-                    var result2 = regex1.exec(content)[1];
-
-                    var data = "adb shell input keyevent 26\nadb install -r " + fileNameApk + "\nadb install -r " + fileNameApkTest + "\nadb shell am instrument -w " + result1 + "/" + result2 + "\n";
-                    console.log(data);
-
-                    var files = [fileNameApk, fileNameApkTest, fileNameManifest];
-                    launchScript(path, files, data);
                 });
 
-            } else if (req.query.method == 'monkey') {
-                var fileNameManifestAndroid = readResult.rows[0].filenamemanifestandroid;
-
-                fs.readFile('./uploads/'+fileNameManifestAndroid, function read(err, content) {
-                    if (err) {
-                        throw err;
-                    }
-
-                    var dateManifestAndroid = readResult.rows[0].datamanifestandroid;
-                    fs.writeFile('./uploads/' + fileNameManifestAndroid, dateManifestAndroid);
-
-                    var data = "adb shell input keyevent 26\nadb install -r " + fileNameApk + "\nadb shell monkey -p 0005 1000";
-                    console.log(data);
-                });
-
-            } else {
-                throw err;
-            }
+            });
 
             //TODO : Modifier l'adresse pour la release
             /*
@@ -143,24 +131,4 @@ router.get('/script',function(req,res,next) {
 
 });
 
-function launchScript(path, files, data){
-    fs.writeFile(path, data, function(error) {
-        if (error) {
-            console.error("write error:  " + error.message);
-        } else {
-            console.log("Successful Write to " + path);
-            child = exec('start script.bat',{cwd: 'script\\platform-tools'},
-                function (error, stdout, stderr) {
-                    console.log('stdout: ' + stdout);
-                    console.log('stderr: ' + stderr);
-                    if (error !== null) {
-                        console.log('exec error: ' + error);
-                    }
-                    for(var file in files){
-                        fs.unlink("./uploads/"+files[file]);
-                    }
-                });
-        }
-    });
-}
 module.exports = router;
