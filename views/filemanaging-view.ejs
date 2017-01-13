@@ -102,6 +102,7 @@
                 <th><i class="icon_user"></i> Apk</th>
                 <th><i class="icon_user"></i> Apk de test</th>
                 <th><i class="icon_user"></i> Manifest</th>
+                <th><i class="icon_user"></i> Manifest Android</th>
                 <th><i class="icon_user"></i> Action</th>
               </tr>
 
@@ -111,7 +112,7 @@
                   <td><a href="/filemanaging-view/dll?id=<%= row.id %>&scope=apkTest" ><%= row.filenameapktest %></a></td>
                   <td><a href="/filemanaging-view/dll?id=<%= row.id %>&scope=manifest" ><%= row.filenamemanifest %></a></td>
                   <td><a href="/filemanaging-view/dll?id=<%= row.id %>&scope=manifestAndroid" ><%= row.filenamemanifestandroid %></a></td>
-                  <td><a href="/filemanaging-view/del?id=<%= row.id %>" ><i class="fa fa-trash-o"></i></a>&nbsp;&nbsp;&nbsp;<a href="/filemanaging-view/script?id=<%= row.id %>" ><i class="fa fa-play"></i></a></td>
+                  <td><a href="/filemanaging-view/del?id=<%= row.id %>" ><i class="fa fa-spin fa-trash-o"></i></a>&nbsp;&nbsp;&nbsp;<a href="/filemanaging-view/script?id=<%= row.id %>&method=robotium" ><i class="fa fa-spin fa-android"></i></a>&nbsp;&nbsp;&nbsp;<a href="/filemanaging-view/script?id=<%= row.id %>&method=monkey" ><i class="fa fa-spin fa-hand-o-down"></i></a></td>
               </tr>
               <% }); %>
 
