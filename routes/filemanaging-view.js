@@ -60,7 +60,15 @@ router.get('/script',function(req,res,next) {
 
     var client = new pg.Client(req.app.get('connexion'));
     client.connect();
-    client.query("SELECT * FROM file_table WHERE id='"+req.query.id+"'",
+    console.log(req.query.id);
+    client.query("insert into script (idFile, method) values ($1, $2)", [req.query.id, req.query.method], function(err, readResult) {
+        console.log('err',err,'pg readResult',readResult);
+        client.query("insert into result (data, idfile, method, status) values ($1, $2, $3, $4)", [null,req.query.id ,req.query.method, false], function(err, readResult) {
+            console.log('err',err,'pg readResult',readResult);
+            res.redirect("/index");
+        });
+    });
+    /*client.query("SELECT * FROM file_table WHERE id='"+req.query.id+"'",
         function(err, readResult) {
             console.log('err',err,'pg readResult',readResult);
             var fileNameApk = readResult.rows[0].filenameapk;
@@ -130,8 +138,7 @@ router.get('/script',function(req,res,next) {
              */
 
 
-
-        });
+        //});*/
 
 });
 
