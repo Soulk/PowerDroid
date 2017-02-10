@@ -13,6 +13,10 @@ var login = require('./routes/login');
 var filemanaging = require('./routes/filemanaging');
 var filemanagingview = require('./routes/filemanaging-view');
 
+
+var PropertiesReader = require('properties-reader');
+const requests = PropertiesReader('models/requests.properties');
+
 var app = express();
 
 app.use(express.static('css'));
@@ -71,6 +75,31 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-var conString = "postgres://postgres:bas115190594@localhost:5432/postgres";
+var conString = "postgres://postgres:lolilol97@localhost:5432/todo";
 app.set("connexion",conString);
+
+var pg = require('pg');
+pg.connect(conString, function (err, client, done) {
+    if (err) {
+
+        if(err.indexOf('already exists') <= -1){
+          return err
+        }
+    }
+    var tmpR = requests.getAllProperties();
+
+    for(var r in tmpR) {
+      if (r !== undefined)
+          if (tmpR.hasOwnProperty(r)) {
+              //console.log("Key is " + r + ", value is" + tmpR[r]);
+              if (r.indexOf('table.create') > -1) {
+                  var query = client.query(tmpR[r]);
+                  query.on('error', function(err) {
+                      console.log('Query error: ' + err);
+                  });
+              }
+          }
+    }
+})
+
 module.exports = app;
