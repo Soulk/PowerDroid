@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var jquerycsv = require('jquery-csv');
 
 var routes = require('./routes/login');
 var users = require('./routes/users');
@@ -12,6 +13,7 @@ var index = require('./routes/index');
 var login = require('./routes/login');
 var filemanaging = require('./routes/filemanaging');
 var filemanagingview = require('./routes/filemanaging-view');
+var resultat = require('./routes/resultat');
 
 
 var PropertiesReader = require('properties-reader');
@@ -21,6 +23,7 @@ var app = express();
 
 app.use(express.static('css'));
 app.use(express.static('js'));
+app.use(express.static('uploads'));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -44,6 +47,7 @@ app.use('/index', index);
 app.use('/login', login);
 app.use('/filemanaging', filemanaging);
 app.use('/filemanaging-view', filemanagingview);
+app.use('/resultat', resultat);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -75,7 +79,7 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-var conString = "postgres://postgres:lolilol97@localhost:5432/todo";
+var conString = "";
 app.set("connexion",conString);
 
 var pg = require('pg');

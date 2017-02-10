@@ -8,7 +8,6 @@ var pg = require("pg");
 
 /* GET filemanaging page. */
 router.get('/', function(req, res, next) {
-    console.log("TEST USERNAME " + req.session.username);
     //upload.dest="./uploads/"+global.username;
     res.render('filemanaging', { title: '' });
 });

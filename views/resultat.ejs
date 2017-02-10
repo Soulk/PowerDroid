@@ -82,50 +82,46 @@
       </div><!--/.row-->
       <div class="row">
         <section class="panel">
-          <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-          <div id="linechart_material"></div>
-          <script>
-            google.charts.load('current', {'packages':['line']});
-            google.charts.setOnLoadCallback(drawChart);
+          <h2><%=row.filenameapk%> / <%=row.method%> / <%=row.time%> - <%=row.date%></h2>
+          <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+          <script src="jquery.csv.min.js"></script>
+          <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 
-            function drawChart() {
-
-              var data = new google.visualization.DataTable();
-              data.addColumn('number', 'Time(sec)');
-              data.addColumn('number', 'Watts(W)');
-              data.addColumn('number', 'Intensité(mA)');
-
-              data.addRows([
-                [1,  37.8, 80.8],
-                [2,  30.9, 69.5],
-                [3,  25.4,   57],
-                [4,  11.7, 18.8],
-                [5,  11.9, 17.6],
-                [6,   8.8, 13.6],
-                [7,   7.6, 12.3],
-                [8,  12.3, 29.2],
-                [9,  16.9, 42.9],
-                [10, 12.8, 30.9],
-                [11,  5.3,  7.9],
-                [12,  6.6,  8.4],
-                [13,  4.8,  6.3],
-                [14,  4.2,  6.2]
-              ]);
-
-              var options = {
-                chart: {
-                  title: 'Resultat de consommation de l\'application {title}'
-                },
-                width: 900,
-                height: 500
-              };
-
-              var chart = new google.charts.Line(document.getElementById('linechart_material'));
-
-              chart.draw(data, options);
-            }
+          <script type="text/javascript"> // load the visualisation API
+            google.load('visualization', '1', { packages: ['corechart', 'controls'] });
           </script>
 
+          <script type="text/javascript">
+            <% var title ="";
+            if(row.method=="robotium") {
+                    title = "avec le fichier de test " + row.filenametestapk ;
+            } else {
+                title = "avec la method monkey";
+            }%>
+            function drawVisualization() {
+              $.get("<%= id %>/data.csv", function(csvString) {
+                // transform the CSV string into a 2-dimensional array
+                var arrayData = $.csv.toArrays(csvString, {onParseValue: $.csv.hooks.castToScalar});
+
+                // this new DataTable object holds all the data
+                var data = new google.visualization.arrayToDataTable(arrayData);
+                // CAPACITY - En-route ATFM delay - YY - CHART
+                var crt_ertdlyYY = new google.visualization.ChartWrapper({
+                  chartType: 'LineChart',
+                  containerId: 'crt_ertdlyYY',
+                  dataTable: data,
+                  options:{
+                    width: 800, height: 500,
+                    title: 'Consommation énergétique de <%=row.filenameapk%> <%=title%> ',
+                    titleTextStyle : {color: 'grey', fontSize: 11},
+                  }
+                });
+                crt_ertdlyYY.draw();
+              });
+            }
+            google.setOnLoadCallback(drawVisualization)
+          </script>
+          <div id="crt_ertdlyYY"></div>
         </section>
       </div>
       </br>
