@@ -13,13 +13,13 @@ router.get('/', function(req, res, next) {
       function(err, readResult) {
           console.log('err',err,'pg readResult');
           res.render('resultat', { row : readResult.rows[0], id: req.session.idd });
-          /*fs.writeFile('./uploads/'+req.session.idd+"/data.csv", readResult.rows[0].data,function(err) {
+          fs.writeFile('./uploads/'+req.session.idd+"/data.csv", readResult.rows[0].data,function(err) {
               console.error("write error:  " + err);
               res.render('resultat', { title: '' });
-              //fs.unlink('./uploads/'+req.session.idd+"/data.csv");
-          });*/
+          });
+          fs.unlink('./uploads/'+req.session.idd+"/data.csv");
 
-  });
+      });
 });
 
 module.exports = router;
