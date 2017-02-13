@@ -95,7 +95,7 @@
         <div class="col-lg-12">
           <section class="panel">
 
-
+            <div class="col-lg-2"><i class="fa fa-android"></i> = Robotium / <i class="fa fa-hand-o-down"></i> = Monkey</div>
             <table id ="repostable" class="table table-striped table-advance table-hover">
               <tbody id="listRepos">
               <tr>
@@ -103,7 +103,7 @@
                 <th><i class="icon_user"></i> Apk de test</th>
                 <th><i class="icon_user"></i> Manifest</th>
                 <th><i class="icon_user"></i> Manifest Android</th>
-                <th><i class="icon_user"></i> Action</th>
+                  <th><i class="icon_user"></i> Action</th>
               </tr>
 
               <% rows.forEach(function(row) { %>
@@ -112,7 +112,19 @@
                   <td><a href="/filemanaging-view/dll?id=<%= row.id %>&scope=apkTest" ><%= row.filenameapktest %></a></td>
                   <td><a href="/filemanaging-view/dll?id=<%= row.id %>&scope=manifest" ><%= row.filenamemanifest %></a></td>
                   <td><a href="/filemanaging-view/dll?id=<%= row.id %>&scope=manifestAndroid" ><%= row.filenamemanifestandroid %></a></td>
-                  <td><a href="/filemanaging-view/del?id=<%= row.id %>" ><i class="fa fa-spin fa-trash-o"></i></a>&nbsp;&nbsp;&nbsp;<a href="/filemanaging-view/script?id=<%= row.id %>&method=robotium" ><i class="fa fa-spin fa-android"></i></a>&nbsp;&nbsp;&nbsp;<a href="/filemanaging-view/script?id=<%= row.id %>&method=monkey" ><i class="fa fa-spin fa-hand-o-down"></i></a></td>
+                <% if(row.filenameapktest != '' && row.filenamemanifestandroid != '' && row.filenamemanifest != '') {%>
+                <td><a href="/filemanaging-view/del?id=<%= row.id %>" ><i class="fa fa-trash-o"></i></a>&nbsp;&nbsp;&nbsp;<a href="/filemanaging-view/script?id=<%= row.id %>&method=robotium" ><i class="fa fa-android"></i></a>&nbsp;&nbsp;&nbsp;<a href="/filemanaging-view/script?id=<%= row.id %>&method=monkey" ><i class="fa fa-hand-o-down"></i></a></td>
+
+                <%}else if(row.filenamemanifestandroid != '') {%>
+                <td><a href="/filemanaging-view/del?id=<%= row.id %>" ><i class="fa fa-trash-o"></i></a>&nbsp;&nbsp;&nbsp;<a href="/filemanaging-view/script?id=<%= row.id %>&method=monkey" ><i class="fa fa-hand-o-down"></i></a></td>
+
+                <%}else if(row.filenameapktest != '' && row.filenamemanifest != '') {%>
+                <td><a href="/filemanaging-view/del?id=<%= row.id %>" ><i class="fa fa-trash-o"></i></a>&nbsp;&nbsp;&nbsp;<a href="/filemanaging-view/script?id=<%= row.id %>&method=robotium" ><i class="fa fa-android"></i></a></td>
+
+                <%} else {%>
+                <td><a href="/filemanaging-view/del?id=<%= row.id %>" ><i class="fa fa-trash-o"></i></a></td>
+
+                <%}%>
               </tr>
               <% }); %>
 
