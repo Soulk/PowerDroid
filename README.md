@@ -7,7 +7,7 @@ Interface web utilsée pour la gestion de fichiers, le lancement des scripts d'a
 Ce projet à pour but de permettre à tout développeur de tester la consommation énergétique d'une application en cours de développement.
 Pour ce faire, nous avons mis au point un système permettant via cette interface web de déposer des APK et des fichiers nécessaires supplémentaires selon la méthode de test ([Robotium](http://robotium.com/) ou [Monkey](https://developer.android.com/studio/test/monkey.html)).
 
-![Fonctionnalités](https://raw.githubusercontent.com/Soulk/PowerDroid/master/img/fonctionnalites.png)
+![Fonctionnalites](https://raw.githubusercontent.com/Soulk/PowerDroid/master/img/fonctionnalites.png)
 
 
 ## Technologies
@@ -34,6 +34,10 @@ $ cd [votre repo]
 $ npm install
 $ npm start
 ```
+
+La database doit être configurée dans le fichier App.js comme suit :
+![Fonctionnalités](https://raw.githubusercontent.com/Soulk/PowerDroid/master/img/connexionDB.png)
+
 
 ## Manuel d'utilisation
 
