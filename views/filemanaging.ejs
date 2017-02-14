@@ -1,21 +1,21 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
-  <meta name="author" content="GeeksLabs">
-  <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
-  <link rel="shortcut icon" href="img/favicon.png">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
+    <meta name="author" content="GeeksLabs">
+    <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+    <link rel="shortcut icon" href="img/favicon.png">
 
-  <title>Gestionnaire de fichiers de test</title>
-  <link rel="stylesheet" href="bootstrap.min.css">
-  <link rel="stylesheet" href="font-awesome.min.css">
-  <link href="elegant-icons-style.css" rel="stylesheet"/>
-  <link href="style.css" rel="stylesheet">
+    <title>Gestionnaire de fichiers de test</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="font-awesome.min.css">
+    <link href="elegant-icons-style.css" rel="stylesheet"/>
+    <link href="style.css" rel="stylesheet">
 
-  <script src="jquery.min.js"></script>
-  <script src="bootstrap.min.js"></script>
+    <script src="jquery.min.js"></script>
+    <script src="bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -23,192 +23,197 @@
 <section id="container" class="">
 
 
-  <header class="header dark-bg">
-    <div class="toggle-nav">
-      <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i class="icon_menu"></i></div>
-    </div>
-
-    <!--logo start-->
-    <a href="index" class="logo">Power <span class="lite">DROID</span></a>
-    <!--logo end-->
-
-    <div class="nav search-row" id="top_menu">
-      <!--  search form start -->
-      <!--  search form end -->
-    </div>
-
-    <div class="top-nav notification-row">
-      <ul class="nav pull-right top-menu">
-      </ul>
-      <!-- notificatoin dropdown end-->
-    </div>
-  </header>
-  <!--header end-->
-
-  <!--sidebar start-->
-  <aside>
-    <div id="sidebar"  class="nav-collapse  ">
-      <!-- sidebar menu start-->
-      <ul class="sidebar-menu">
-        <li class="active">
-          <a class="" href="index">
-            <i class="icon_house_alt"></i>
-            <span>Dashboard</span>
-          </a>
-        </li>
-        <li class="dropdown active">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon_drawer_alt"></i>Fichiers de test
-            <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="filemanaging">Ajout de fichiers de test</a></li>
-            <li><a href="filemanaging-view">Visualiser fichiers de tests</a></li>
-          </ul>
-        </li>
-      </ul>
-      <!-- sidebar menu end-->
-    </div>
-  </aside>
-  <!--sidebar end-->
-
-  <!--main content start-->
-  <section id="main-content">
-    <section class="wrapper">
-      <!--overview start-->
-      <div class="row">
-        <div class="col-lg-12">
-          <h3 class="page-header"><i class="fa fa-laptop"></i> Gestionnaire de fichiers de test</h3>
+    <header class="header dark-bg">
+        <div class="toggle-nav">
+            <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"><i
+                        class="icon_menu"></i></div>
         </div>
-      </div>
 
-      <div class="row">
-        <div class="col-lg-12">
-          <section class="panel">
-          <form id="form" action="filemanaging/add" method="post" class="navbar-form navbar-left" enctype="multipart/form-data">
-            <div class="form-group">
-              <div id="apk">
-                <label for="test">Ajouter une nouvelle apk</label>
-                <INPUT id="test" TYPE="file"  NAME="test" SIZE=40>
-              </div>
-              <table>
-                <tr>
-                  <td>
-                    <div class="checkbox">
-                      <label>
-                        <input name="robotium" type="checkbox" id="robotium"> Robotium
-                      </label>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox" id="monkey"> Android Monkey
-                      </label>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="sr-only" id="apktest">
-                      <label for="test1">Ajouter une nouvelle apk de test</label>
-                      <INPUT id="test1" TYPE="file"  NAME="test1" SIZE=40>
-                    </div>
-                  </td>
-                  <td>
-                    <div class="sr-only" id="apkmanifestandroid">
-                      <label for="test3">Ajouter un nouveau manifest associé</label>
-                      <INPUT id="test3" TYPE="file"  NAME="test3" SIZE=40>
-                    </div>
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <div class="sr-only" id="apktestmanifest">
-                      <label for="test2">Ajouter un nouveau manifest de test associé</label>
-                      <INPUT id="test2" TYPE="file"  NAME="test2" SIZE=40>
-                    </div>
-                  </td>
-                </tr>
+        <!--logo start-->
+        <a href="index" class="logo">Power <span class="lite">DROID</span></a>
+        <!--logo end-->
 
-
-              </table>
-            </div>
-
-            <br>
-            <button id="btnsubmit" type="submit" class="btn btn-default" disabled=true>Submit</button>
-          </form>
-          </section>
+        <div class="nav search-row" id="top_menu">
+            <!--  search form start -->
+            <!--  search form end -->
         </div>
-      </div>
-      <div role="dialog" id="myModalCaution" class="modal fade">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" data-dismiss="modal" class="close">×</button>
-              <h4 class="modal-title">Attention</h4>
-            </div>
-            <div class="modal-body">
-              <p id="paraModal" class="alert alert-danger"><button type="button" data-dismiss="modal" class="btn btn-default">Close</button></p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
-            </div>
-          </div>
+
+        <div class="top-nav notification-row">
+            <ul class="nav pull-right top-menu">
+            </ul>
+            <!-- notificatoin dropdown end-->
         </div>
-      </div>
+    </header>
+    <!--header end-->
+
+    <!--sidebar start-->
+    <aside>
+        <div id="sidebar" class="nav-collapse  ">
+            <!-- sidebar menu start-->
+            <ul class="sidebar-menu">
+                <li class="active">
+                    <a class="" href="index">
+                        <i class="icon_house_alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="dropdown active">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon_drawer_alt"></i>Fichiers
+                        de test
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="filemanaging">Ajout de fichiers de test</a></li>
+                        <li><a href="filemanaging-view">Visualiser fichiers de tests</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- sidebar menu end-->
+        </div>
+    </aside>
+    <!--sidebar end-->
+
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+            <!--overview start-->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="page-header"><i class="fa fa-laptop"></i> Gestionnaire de fichiers de test</h3>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <section class="panel">
+                        <form id="form" action="filemanaging/add" method="post" class="navbar-form navbar-left"
+                              enctype="multipart/form-data">
+                            <div class="form-group">
+                                <div id="apk">
+                                    <label for="test">Ajouter une nouvelle apk</label>
+                                    <INPUT id="test" TYPE="file" NAME="test" SIZE=40>
+                                </div>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input name="robotium" type="checkbox" id="robotium"> Robotium
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" id="monkey"> Android Monkey
+                                                </label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="sr-only" id="apktest">
+                                                <label for="test1">Ajouter une nouvelle apk de test</label>
+                                                <INPUT id="test1" TYPE="file" NAME="test1" SIZE=40>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="sr-only" id="apkmanifestandroid">
+                                                <label for="test3">Ajouter un nouveau manifest associé</label>
+                                                <INPUT id="test3" TYPE="file" NAME="test3" SIZE=40>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="sr-only" id="apktestmanifest">
+                                                <label for="test2">Ajouter un nouveau manifest de test associé</label>
+                                                <INPUT id="test2" TYPE="file" NAME="test2" SIZE=40>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+
+                                </table>
+                            </div>
+
+                            <br>
+                            <button id="btnsubmit" type="submit" class="btn btn-default" disabled=true>Submit</button>
+                        </form>
+                    </section>
+                </div>
+            </div>
+            <div role="dialog" id="myModalCaution" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" data-dismiss="modal" class="close">×</button>
+                            <h4 class="modal-title">Attention</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p id="paraModal" class="alert alert-danger">
+                                <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </section>
-  </section>
 </section>
 </body>
 <script>
-  $(document).ready(function() {
-    document.getElementById("robotium").addEventListener("change", function (e) {
-      if (e.target.checked) {
-        document.getElementById("btnsubmit").disabled = false;
-        document.getElementById("apktest").className = "";
-        document.getElementById("apktestmanifest").className = "";
-      } else {
-        if (!document.getElementById("monkey").checked)document.getElementById("btnsubmit").disabled = true;
-        ;
-        document.getElementById("apktest").className = "sr-only";
-        document.getElementById("apktestmanifest").className = "sr-only";
-      }
+    $(document).ready(function () {
+        document.getElementById("robotium").addEventListener("change", function (e) {
+            if (e.target.checked) {
+                document.getElementById("btnsubmit").disabled = false;
+                document.getElementById("apktest").className = "";
+                document.getElementById("apktestmanifest").className = "";
+            } else {
+                if (!document.getElementById("monkey").checked)document.getElementById("btnsubmit").disabled = true;
+                ;
+                document.getElementById("apktest").className = "sr-only";
+                document.getElementById("apktestmanifest").className = "sr-only";
+            }
+        });
+
+        document.getElementById("monkey").addEventListener("change", function (e) {
+            if (e.target.checked) {
+                document.getElementById("btnsubmit").disabled = false;
+                document.getElementById("apkmanifestandroid").className = "";
+            } else {
+                if (!document.getElementById("robotium").checked) document.getElementById("btnsubmit").disabled = true;
+                ;
+                document.getElementById("apkmanifestandroid").className = "sr-only";
+            }
+        });
+        function processForm(e) {
+            if (e.preventDefault) e.preventDefault();
+            if (document.getElementById("robotium").checked && (document.getElementById("test").files.length == 0 || document.getElementById("test1").files.length == 0 || document.getElementById("test2").files.length == 0)) {
+                $("#paraModal").text("Veuillez bien remplir tous les champs.");
+                $("#myModalCaution").modal('show');
+                return false;
+            }
+            if (document.getElementById("monkey").checked && (document.getElementById("test").files.length == 0 || document.getElementById("test3").files.length == 0)) {
+                $("#paraModal").text("Veuillez bien remplir tous les champs.");
+                $("#myModalCaution").modal('show');
+                return false;
+            }
+            /* do what you want with the form */
+
+            // You must return false to prevent the default form behavior
+            document.getElementById('form').submit();
+            return true;
+        }
+
+        var form = document.getElementById('form');
+        if (form.attachEvent) {
+            form.attachEvent("submit", processForm);
+        } else {
+            form.addEventListener("submit", processForm);
+        }
     });
-
-    document.getElementById("monkey").addEventListener("change", function (e) {
-      if (e.target.checked) {
-        document.getElementById("btnsubmit").disabled = false;
-        document.getElementById("apkmanifestandroid").className = "";
-      } else {
-        if (!document.getElementById("robotium").checked) document.getElementById("btnsubmit").disabled = true;
-        ;
-        document.getElementById("apkmanifestandroid").className = "sr-only";
-      }
-    });
-    function processForm(e) {
-      if (e.preventDefault) e.preventDefault();
-      if (document.getElementById("robotium").checked && (document.getElementById("test").files.length == 0 || document.getElementById("test1").files.length == 0 || document.getElementById("test2").files.length == 0)) {
-          $("#paraModal").text("Veuillez bien remplir tous les champs.");
-          $("#myModalCaution").modal('show');
-          return false;
-      }
-      if (document.getElementById("monkey").checked && (document.getElementById("test").files.length == 0 || document.getElementById("test3").files.length == 0)) {
-          $("#paraModal").text("Veuillez bien remplir tous les champs.");
-          $("#myModalCaution").modal('show');
-          return false;
-      }
-      /* do what you want with the form */
-
-      // You must return false to prevent the default form behavior
-      document.getElementById('form').submit();
-      return true;
-    }
-
-    var form = document.getElementById('form');
-    if (form.attachEvent) {
-      form.attachEvent("submit", processForm);
-    } else {
-      form.addEventListener("submit", processForm);
-    }
-  });
 </script>
 </html>
